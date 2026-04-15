@@ -1,3 +1,4 @@
+from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, HttpUrl
@@ -7,6 +8,8 @@ import aiohttp
 import os
 
 app = FastAPI()
+
+Instrumentator().instrument(app).expose(app)
 
 # DATABASE CONFIG
 DATABASE_URL = os.getenv("DATABASE_URL")
